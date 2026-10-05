@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tourism Demand Lab — RNN vs LSTM vs GRU</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      Tourism Demand Lab
+      <small>RNN · LSTM · GRU comparison</small>
+    </div>
+    <nav class="nav">
+      <button class="nav-item active" data-view="overview">Overview</button>
+      <button class="nav-item" data-view="explore">Explore the Data</button>
+      <button class="nav-item" data-view="compare">Compare Models</button>
+      <button class="nav-item" data-view="forecast">Forecast Lab</button>
+      <button class="nav-item" data-view="conclusion">Conclusion</button>
+    </nav>
+    <div class="sidebar-foot">
+      National daily tourist arrivals<br>Aug 2018 – May 2019
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="view active" id="view-overview">
+      <div class="hero">
+        <div>
+          <h1>Which recurrent network reads tourism demand best?</h1>
+          <p class="lede">A Simple RNN, an LSTM, and a GRU were trained on identical
+            14-day windows of national daily tourist arrivals, under identical
+            conditions, and scored on a held-out future period they never saw
+            during training.</p>
+        </div>
+        <div class="stat-callout" id="hero-stat"></div>
+      </div>
+
+      <div class="hero-chart" id="hero-chart"></div>
+
+      <div class="stat-grid" id="overview-stats"></div>
+
+      <div class="section-block">
+        <h2>About this dataset</h2>
+        <p>The source data tracks daily visits across 432 individual tourist-site
+          combinations (54 areas × 8 facility types). This project sums all of them
+          into a single national daily demand figure — a clean, interpretable
+          signal with a clear weekly rhythm and a winter lull, ideal for testing
+          how well each architecture captures recurring structure over time.</p>
+      </div>
+    </section>
+
+    <!-- ============ EXPLORE ============ -->
+    <section class="view" id="view-explore">
+      <h2 style="font-size:1.5rem;margin-bottom:6px;">Explore the Data</h2>
+      <p style="color:var(--text-muted);max-width:680px;margin-bottom:24px;">
+        Six views into the same national demand series, showing the patterns the
+        models had to learn from just 14-day lookback windows.</p>
+      <div class="gallery" id="eda-gallery"></div>
+    </section>
+
+    <!-- ============ COMPARE ============ -->
+    <section class="view" id="view-compare">
+      <h2 style="font-size:1.5rem;margin-bottom:18px;">Compare Models</h2>
+
+      <table class="metrics-table" id="metrics-table"></table>
+
+      <div class="bar-grid" id="bar-grid"></div>
+
+      <div class="chart-card">
+        <h4 style="font-family:var(--sans);font-size:0.9rem;color:var(--text-muted);margin:0 0 8px 4px;">
+          Actual vs. predicted — held-out test window</h4>
+        <div id="actual-vs-pred-chart"></div>
+      </div>
+    </section>
+
+    <!-- ============ FORECAST LAB ============ -->
+    <section class="view" id="view-forecast">
+      <h2 style="font-size:1.5rem;margin-bottom:18px;">Forecast Lab</h2>
+
+      <div class="lab-panel">
+        <h3>Run a live forecast</h3>
+        <div class="lab-sub">This calls the actual trained model weights, right in
+          your browser — the same recursive forecasting method used in the
+          notebook (Stage 9), reproduced here in JavaScript and numerically
+          verified against the original Python output.</div>
+        <div class="lab-controls">
+          <div class="chip-group" id="model-chips"></div>
+          <div class="horizon-control">
+            <label for="horizon-slider">Forecast horizon</label>
+            <input type="range" id="horizon-slider" min="1" max="30" value="14">
+            <span class="horizon-value" id="horizon-value">14 days</span>
+          </div>
+          <button class="run-btn" id="run-forecast-btn">Run forecast</button>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div id="forecast-chart"></div>
+      </div>
+
+      <div class="forecast-table-wrap">
+        <table class="forecast-table" id="forecast-table"></table>
+      </div>
+    </section>
+
+    <!-- ============ CONCLUSION ============ -->
+    <section class="view" id="view-conclusion">
+      <h2 style="font-size:1.5rem;margin-bottom:18px;">Conclusion</h2>
+      <div class="conclusion-block" id="conclusion-content"></div>
+    </section>
+
+    <footer class="credit">
+      Comparative Analysis of RNN, LSTM and GRU for Tourism Demand Prediction —
+      every number and chart on this page comes from the accompanying notebook's
+      real trained models, run either at notebook time or live in this page.
+    </footer>
+
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="images_data.js"></script>
+<script src="inference.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
